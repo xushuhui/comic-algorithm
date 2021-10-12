@@ -5,7 +5,10 @@ import (
 )
 
 func TestNewArray(t *testing.T) {
-	t.Log(NewArray(10))
+	s1 := []int{1,2,3,4,5}
+s2 := s1
+s2 = append(s2, 1)
+t.Log(s1,s2)
 }
 
 func Test_array_Add(t *testing.T) {

@@ -37,16 +37,25 @@ func (a *array) Remove(index int) {
 	if index < 0 || index > a.size {
 		panic("index out of range")
 	}
-
+	for i := index+1; i < a.size; i++ {
+		a.data[i-1] = a.data[i]
+	}
+	//todo resize
+	a.data[a.size] = 0
+	a.size--
 }
 func (a *array) RemoveFirst() {
 	a.Remove(0)
 }
 func (a *array) RemoveLast() {
-	a.Remove(0)
+	a.Remove(a.size-1)
 }
 func (a *array) RemoveElement(element int) {
-
+	for i := 0; i < a.size; i++ {
+		if a.data[i] == element{
+			a.Remove(i)
+		}
+	}
 }
 func (a *array) Get(index int) int {
 	if index < 0 || index > a.size {
@@ -60,17 +69,29 @@ func (a *array) GetFirst() (element int) {
 func (a *array) GetLast() (element int) {
 	return a.Get(a.size-1)
 }
-func (a *array) Find(element int) (index int) {
-	return index
+func (a *array) Find(element int) ( int) {
+
+	for i := 0; i < a.size; i++ {
+		if a.data[i] == element{
+			return i
+		}
+	}
+	return -1
 }
-func (a *array) Contains(element int) (is bool) {
-	return is
+func (a *array) Contains(element int) (bool) {
+	for i := 0; i < a.size; i++ {
+		if a.data[i] == element{
+			return true
+		}
+	}
+	return false
 }
 
 func (a *array) Set(index int, element int) {
 	if index < 0 || index > a.size {
 		panic("index out of range")
 	}
+	a.data[index] = element
 	return
 }
 func (a *array) GetSize() (size int) {
